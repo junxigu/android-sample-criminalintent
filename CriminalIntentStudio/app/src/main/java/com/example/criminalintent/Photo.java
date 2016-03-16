@@ -14,7 +14,7 @@ public class Photo {
 	}
 
 	public Photo(JSONObject json) throws JSONException {
-		fileName = (String) json.getString(JSON_FILENAME);
+		fileName = json.getString(JSON_FILENAME);
 	}
 
 	public JSONObject toJSON() throws JSONException {

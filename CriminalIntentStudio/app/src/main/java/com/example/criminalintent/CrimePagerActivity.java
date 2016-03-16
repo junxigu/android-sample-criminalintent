@@ -1,17 +1,16 @@
 package com.example.criminalintent;
 
-import java.util.List;
-import java.util.UUID;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 
-public class CrimePagerActivity extends FragmentActivity implements
+import java.util.List;
+import java.util.UUID;
+
+public class CrimePagerActivity extends ActionBarActivity implements
 		CrimeFragment.Callbacks {
 
 	private ViewPager viewPager;

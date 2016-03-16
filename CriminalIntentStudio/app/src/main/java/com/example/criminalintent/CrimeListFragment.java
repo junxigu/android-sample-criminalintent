@@ -1,13 +1,12 @@
 package com.example.criminalintent;
 
-import java.util.List;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -23,6 +22,8 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class CrimeListFragment extends ListFragment {
 
@@ -69,13 +70,6 @@ public class CrimeListFragment extends ListFragment {
 	public void onResume() {
 		super.onResume();
 		((CrimeAdapter) getListAdapter()).notifyDataSetChanged();
-	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent Data) {
-		if (requestCode == REQUEST_CRIME) {
-
-		}
 	}
 
 	@Override
@@ -140,7 +134,7 @@ public class CrimeListFragment extends ListFragment {
 					switch (item.getItemId()) {
 					case R.id.menu_item_delete_crime:
 						CrimeAdapter adapter = (CrimeAdapter) getListAdapter();
-						ListView listView = (ListView) getListView();
+						ListView listView = getListView();
 						CrimeLab crimeLab = CrimeLab.get(getActivity());
 						for (int i = adapter.getCount(); i >= 0; i--) {
 							if (listView.isItemChecked(i)) {
@@ -198,12 +192,12 @@ public class CrimeListFragment extends ListFragment {
 		CrimeLab.get(getActivity()).saveCrimes();
 	}
 
-	@TargetApi(11)
 	public void updateSubTitle() {
-		if (getActivity().getActionBar().getSubtitle() == null) {
-			getActivity().getActionBar().setSubtitle(R.string.subtitle);
+		ActionBar actionBar = ((ActionBarActivity)getActivity()).getSupportActionBar();
+		if (actionBar.getSubtitle() == null) {
+			actionBar.setSubtitle(R.string.subtitle);
 		} else {
-			getActivity().getActionBar().setSubtitle(null);
+			actionBar.setSubtitle(null);
 		}
 	}
 
@@ -214,15 +208,6 @@ public class CrimeListFragment extends ListFragment {
 	public void updateSubtitleMenuItem(MenuItem item) {
 		item.setTitle(subtitleVisible ? R.string.hide_subtitle
 				: R.string.show_subtitle);
-	}
-
-	public void showEmptyList() {
-		ListView listview = getListView();
-		TextView textView = new TextView(getActivity());
-		textView.setText("No Crime Yet");
-		ViewGroup parentView = (ViewGroup) listview.getParent();
-		parentView.addView(textView, 2);
-		listview.setEmptyView(textView);
 	}
 
 	private class CrimeAdapter extends ArrayAdapter<Crime> {

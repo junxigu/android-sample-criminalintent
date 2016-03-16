@@ -1,20 +1,17 @@
 package com.example.criminalintent;
 
-import java.util.Date;
-import java.util.UUID;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -29,6 +26,9 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import java.util.Date;
+import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
 
@@ -52,19 +52,12 @@ public class CrimeFragment extends Fragment {
 	private Button suspectButton;
 	private Callbacks callbacks;
 
-	@TargetApi(11)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		mCrime = CrimeLab.get(getActivity()).getCrime(
 				(UUID) getArguments().getSerializable(EXTRA_CRIME_ID));
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			if (NavUtils.getParentActivityName(getActivity()) != null) {
-				getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-			}
-		}
 
 		setHasOptionsMenu(true);
 	}

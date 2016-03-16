@@ -41,7 +41,7 @@ public class CriminalIntentJSONSerializer {
 
 	@SuppressLint("NewApi")
 	public List<Crime> loadCrimes() throws IOException, JSONException {
-		List<Crime> crimes = new ArrayList<Crime>();
+		List<Crime> crimes = new ArrayList<>();
 		List<String> files = Arrays.asList(context.fileList());
 		if(files.contains(fileName)) {
 			try (BufferedReader reader = new BufferedReader(new InputStreamReader(

@@ -164,10 +164,6 @@ public class CrimeCameraFragment extends Fragment {
 		}
 	}
 
-	private void sendResult() {
-
-	}
-
 	private Size getBestSupportdSize(List<Size> sizes, int w, int h) {
 		Size bestSize = sizes.get(0);
 		int largestArea = bestSize.width * bestSize.height;
